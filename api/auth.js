@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'OAuth client ID not configured' });
       }
       
-      const redirectUri = 'https://oauth-server-neon.vercel.app/api/callback';
+      const redirectUri = 'https://oauth-server-neon.vercel.app/api/auth';
       const scope = 'repo,user';
       
       const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`;
