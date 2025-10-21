@@ -1,0 +1,13 @@
+{
+  "name": "adams-ocean-lab-oauth",
+  "version": "1.0.0",
+  "description": "OAuth server for Adam's Ocean Lab CMS",
+  "main": "api/auth.js",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}
