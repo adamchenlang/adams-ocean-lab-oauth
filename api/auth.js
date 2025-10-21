@@ -24,8 +24,23 @@ export default async function handler(req, res) {
       
       const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`;
       
-      res.setHeader('Location', githubAuthUrl);
-      return res.status(302).end();
+      // Use HTML redirect instead of HTTP redirect to avoid Vercel header issues
+      const html = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Redirecting to GitHub...</title>
+            <meta http-equiv="refresh" content="0;url=${githubAuthUrl}">
+          </head>
+          <body>
+            <script>window.location.href = "${githubAuthUrl}";</script>
+            <p>Redirecting to GitHub for authorization...</p>
+          </body>
+        </html>
+      `;
+      
+      res.setHeader('Content-Type', 'text/html');
+      return res.status(200).send(html);
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
