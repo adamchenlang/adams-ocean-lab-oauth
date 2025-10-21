@@ -24,7 +24,8 @@ export default async function handler(req, res) {
       
       const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`;
       
-      return res.redirect(302, githubAuthUrl);
+      res.setHeader('Location', githubAuthUrl);
+      return res.status(302).end();
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
